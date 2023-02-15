@@ -86,10 +86,16 @@ function App() {
   ];
 
   const [currentQuestion, setcurrentQuestion] = useState(0);
+  let [currentScore, setcurrentScore] = useState(0);
 
-  const handleAnswerClick = () => {
+  const handleAnswerClick = (isCorrect) => {
     const nextQuestion = currentQuestion + 1;
+    // let score = currentScore;
     setcurrentQuestion(nextQuestion);
+    if (isCorrect) {
+      setcurrentScore(currentScore + 1);
+    }
+    console.log(currentScore);
   };
 
   return (
@@ -108,7 +114,7 @@ function App() {
           <div className="col-4 d-flex flex-column justify-content-center align-items-center">
             {QuestionBank[currentQuestion].answers.map((answerOption) => (
               <Answer
-                handleAnswerClick={handleAnswerClick}
+                handleAnswerClick={() => handleAnswerClick(answerOption.isCorrect)}
                 answerOption={answerOption.answer}
                 key={answerOption.id}
               ></Answer>
